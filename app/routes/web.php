@@ -1,4 +1,8 @@
 <?php
+use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\AutoController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -10,7 +14,12 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes();
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['middleware' => 'auth'], function(){
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::resource('auto','AutoController');
 });
+
+
+
