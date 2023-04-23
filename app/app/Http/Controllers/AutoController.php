@@ -13,7 +13,8 @@ class AutoController extends Controller
      */
     public function index()
     {
-        //データの一覧表示ログイン後の画面系統に関して
+        
+    
     }
 
     /**
@@ -23,7 +24,7 @@ class AutoController extends Controller
      */
     public function create()
     {
-        //登録用のフォーム。フォームを表示させる。食事登録、体重登録に関して。
+        return view('weight_fat');
     }
 
     /**
