@@ -1,5 +1,5 @@
-@extends('layouts.aside')
 @extends('layouts.app')
+@extends('layouts.aside')
 
 @section('content')
 
@@ -23,4 +23,6 @@
         </div>
     </div>
 </div>
+
+
 @endsection

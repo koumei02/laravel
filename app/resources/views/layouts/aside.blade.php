@@ -40,10 +40,15 @@
         <a class="nav-link" href="#">タイムライン</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">食事記録</a>
+        <a class="nav-link" href="{{route('food.create')}}">食事記録</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{{route('auto.create')}}">体重・体脂肪率記録</a>
       </li> 
+      <li class="nav-item">
+        <a class="nav-link" href="{{route('auto.edit', ['auto' => Auth::id()])}}">プロフィール編集</a>
+      </li> 
+
+
     </ul>
   </div>

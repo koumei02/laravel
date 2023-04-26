@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Http\Request;
+use App\Weight;
+use App\Plofile;
 
 class AutoController extends Controller
 {
@@ -13,8 +17,7 @@ class AutoController extends Controller
      */
     public function index()
     {
-        
-    
+        return view('timeline');
     }
 
     /**
@@ -36,6 +39,16 @@ class AutoController extends Controller
     public function store(Request $request)
     {
         //登録作業を書く箇所。
+        $weighting = new Weight;
+        //左側が入力したテーブル。右側がコントローラに入力する。 
+        $weighting->date = $request ->date;
+        $weighting->weight = $request ->weight;
+        $weighting->fat = $request ->fat;
+        $weighting->comment = $request ->comment;
+        $weighting->user_id = Auth::id();
+        $weighting->save();
+
+        return redirect('auto');
     }
 
     /**
@@ -58,6 +71,10 @@ class AutoController extends Controller
     public function edit($id)
     {
         //編集のフォームを表示させる。プロフィール画面
+
+        return view('profile_edit');
+
+
     }
 
     /**
@@ -70,6 +87,26 @@ class AutoController extends Controller
     public function update(Request $request, $id)
     {
         //編集処理を行う。保存について
+        $profiling = new Plofile;
+        $profile = $profiling->find($id);
+        // if(empty($profile)){
+            $file_name = $request->file('icon')->getClientOriginalName();
+            $request->file('icon')->storeAs('public/icons', $file_name);
+    
+    
+            $profiling->icon = $file_name;
+            $profiling->comment = $request->comment;
+            $profiling->gender = $request->gender;
+            $profiling->age = $request->age;
+            $profiling->target_weight = $request->target_weight;
+            $profiling->target_fat = $request->target_fat;
+            $profiling->user_id = Auth::id();
+
+            $profiling->save();
+        // }
+
+    
+        return redirect('auto');
     }
 
     /**
